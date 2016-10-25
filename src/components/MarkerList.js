@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import React, { Component } from 'react'
+import { GoogleMapLoader, GoogleMap, Marker, InfoWindow } from "react-google-maps"
 
 export default class MarkerList extends Component {
 
   constructor(props, context) {
-  	super(props, context);
+  	super(props, context)
     this.state = {
       defaultCenter: {
         lat: 39.113014,
@@ -18,35 +18,35 @@ export default class MarkerList extends Component {
 
 	componentWillMount() {
 		this.context.store.subscribe(() => {
-			let state = this.context.store.getState().currentSelections;
+			let state = this.context.store.getState().currentSelections
 		 	this.setState({
 		 		windowPosition: state.position,
 		 		showInfoWindow: state.showInfoWindow,
 		 		current_name: state.key
-		 	});
-		});
+		 	})
+		})
 	}
 
 	toggleInfoWindow(name, loc) {
 
 		if (loc == null) {
-		  this.setState({ windowPosition: null });
-		  return;
+		  this.setState({ windowPosition: null })
+		  return
 		}
 		let markerLoc = {
       lat: loc.latLng.lat(),
       lng: loc.latLng.lng()
-    };
+    }
 		this.setState({
       current_name: name,
       windowPosition: markerLoc,
       showInfoWindow: true
-    });
+    })
 	}
 
 	render() {
 
-		let mountains = this.props.mountains;
+		let mountains = this.props.mountains
 
 		return (
 		  <section style={{height: "100%", width: "40%"}}>
@@ -88,10 +88,8 @@ export default class MarkerList extends Component {
 		      }
 		    />
 		  </section>
-		);
+		)
 	}
 }
 
-MarkerList.contextTypes = { store: React.PropTypes.object };
-
-
+MarkerList.contextTypes = { store: React.PropTypes.object }

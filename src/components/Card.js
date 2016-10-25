@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { updateSelection } from '../actions';
+import React, { Component } from 'react'
+
 
 export default class Card extends Component {
 
@@ -7,24 +7,23 @@ export default class Card extends Component {
     let position = {
       lat: coordinates[1],
       lng: coordinates[0]
-    };
-    let showInfoWindow = true;
-    this.context.store.dispatch(
-      updateSelection(properties.name, position, showInfoWindow)
-    );
+    }
+    let showInfoWindow = true
+    this.props.updateSelection(properties.name, position, showInfoWindow)
+
   }
 
   hideInfoWindow() {
-    let key = null;
-    let position = null;
-    let showInfoWindow = false;
-    this.context.store.dispatch(updateSelection(key, position, showInfoWindow));
+    let key = null
+    let position = null
+    let showInfoWindow = false
+    this.props.updateSelection(key, position, showInfoWindow)
   }
 
   render() {
-    let photo = "/photos/" + this.props.data.photo;
-    let properties = this.props.data.properties;
-    let coordinates = this.props.data.geometry.coordinates;
+    let photo = "/photos/" + this.props.data.photo
+    let properties = this.props.data.properties
+    let coordinates = this.props.data.geometry.coordinates
 
     return (
       <div
@@ -48,8 +47,6 @@ export default class Card extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
-
-Card.contextTypes = { store: React.PropTypes.object };

@@ -1,47 +1,47 @@
-import React, { Component } from 'react';
-import InputRange from 'react-input-range';
-import '../../node_modules/react-input-range/dist/react-input-range.css';
+import React, { Component } from 'react'
+import InputRange from 'react-input-range'
+import '../../node_modules/react-input-range/dist/react-input-range.css'
 
-import filters from '../data/filters';
-import { updateQuery } from '../actions';
+import filters from '../data/filters'
+import { updateQuery } from '../actions'
 
 class SearchFilters extends Component {
 
   constructor(props, context) {
-    super(props, context);
-    this.state = filters;
+    super(props, context)
+    this.state = filters
   }
 
   updateStore() {
     this.context.store.dispatch(
       updateQuery(this.state.query, this.state.show_filters, this.state.filters)
-    );
+    )
   }
 
   onQueryChange(event) {
     this.setState({
       query: event.target.value.toLowerCase()
     }, () => {
-      this.updateStore();
-    });
+      this.updateStore()
+    })
   }
 
   toggleFilters(event) {
-    var show_filters = !this.state.show_filters;
+    var show_filters = !this.state.show_filters
     this.setState({
       show_filters
-    });
+    })
   }
 
   updateFilter(id, component, value) {
-    let current_filters = this.state.filters;
-    current_filters[id] = value;
+    let current_filters = this.state.filters
+    current_filters[id] = value
 
     this.setState({
       filters: current_filters
     }, () => {
-      this.updateStore();
-    });
+      this.updateStore()
+    })
   }
 
   render() {
@@ -131,10 +131,10 @@ class SearchFilters extends Component {
           </ul>
         </div>
       </div>
-    );
+    )
   }
 
 }
 
-SearchFilters.contextTypes = { store: React.PropTypes.object };
-export default SearchFilters;
+SearchFilters.contextTypes = { store: React.PropTypes.object }
+export default SearchFilters

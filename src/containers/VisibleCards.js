@@ -1,8 +1,9 @@
-import { connect } from 'react-redux';
-import CardList from '../components/CardList';
+import { connect } from 'react-redux'
+import CardList from '../components/CardList'
+import { updateSelection } from '../actions'
 
-import getVisibleMountains from '../helpers/getVisibleMountains';
-import mountains from '../data/mountains';
+import getVisibleMountains from '../helpers/getVisibleMountains'
+import mountains from '../data/mountains'
 
 const mapStateToProps = (state) => {
   return {
@@ -14,8 +15,17 @@ const mapStateToProps = (state) => {
   }
 }
 
-const VisibleCards = connect(
-  mapStateToProps
-)(CardList);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateSelection: (key, position, showInfoWindow) => {
+      dispatch(updateSelection(key, position, showInfoWindow))
+    }
+  }
+}
 
-export default VisibleCards;
+const VisibleCards = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CardList)
+
+export default VisibleCards
