@@ -10,7 +10,8 @@ const mapStateToProps = (state) => {
       mountains,
       state.search.query,
       state.search.filters
-    )
+    ),
+    currentSelections: state.currentSelections
   }
 }
 

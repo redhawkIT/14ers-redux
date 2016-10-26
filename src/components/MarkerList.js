@@ -16,16 +16,15 @@ export default class MarkerList extends Component {
     }
 	}
 
-	componentWillMount() {
-		this.context.store.subscribe(() => {
-			let state = this.context.store.getState().currentSelections
-		 	this.setState({
-		 		windowPosition: state.position,
-		 		showInfoWindow: state.showInfoWindow,
-		 		current_name: state.key
-		 	})
-		})
-	}
+  componentWillReceiveProps() {
+    const {position, showInfoWindow, key} = this.props.currentSelections
+    this.setState({
+      windowPosition: position,
+      current_name: key,
+      showInfoWindow
+    })
+  }
+
 
 	toggleInfoWindow(name, loc) {
 
