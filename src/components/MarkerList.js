@@ -44,23 +44,17 @@ export default class MarkerList extends Component {
 	}
 
 	render() {
-
-		let mountains = this.props.mountains
+    const {mountains} = this.props
+    const {windowPosition,  current_name, defaultCenter, showInfoWindow} = this.state
 
 		return (
 		  <section style={{height: "100%", width: "40%"}}>
 		    <GoogleMapLoader
-		      containerElement={
-		        <div
-		          style={{
-		            height: "100%",
-		          }}
-		        />
-		      }
+		      containerElement={<div style={{height: "100%"}}/>}
 		      googleMapElement={
 		        <GoogleMap
 		          defaultZoom={7}
-		          defaultCenter={this.state.defaultCenter}
+		          defaultCenter={defaultCenter}
 		        >
     			    {mountains.map((row, key) => (
     			      <Marker
@@ -74,13 +68,13 @@ export default class MarkerList extends Component {
     			    ))}
 
 	            {
-	              this.state.showInfoWindow &&
+	              showInfoWindow &&
 	              <InfoWindow
-	                position={this.state.windowPosition}
+	                position={windowPosition}
 	                onCloseclick={(e) => { this.setState({ showInfoWindow: false }) }}
 	                options={{pixelOffset: new window.google.maps.Size(0,-30)}}
 	                >
-	              	{this.state.current_name}
+	              	{current_name}
 	              </InfoWindow>
 	            }
 		        </GoogleMap>
@@ -90,5 +84,3 @@ export default class MarkerList extends Component {
 		)
 	}
 }
-
-MarkerList.contextTypes = { store: React.PropTypes.object }
