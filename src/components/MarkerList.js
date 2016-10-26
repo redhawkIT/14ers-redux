@@ -25,6 +25,17 @@ export default class MarkerList extends Component {
     })
   }
 
+  markers(mountains) {
+    return mountains.map((row, key) => (
+      <Marker
+        position={{lat: row.geometry.coordinates[1], lng: row.geometry.coordinates[0]}}
+        key={row.properties.name}
+        onClick={this.toggleInfoWindow.bind(this, row.properties.name)}
+      >
+      </Marker>
+    ))
+  }
+
 
 	toggleInfoWindow(name, loc) {
 
@@ -56,16 +67,7 @@ export default class MarkerList extends Component {
 		          defaultZoom={7}
 		          defaultCenter={defaultCenter}
 		        >
-    			    {mountains.map((row, key) => (
-    			      <Marker
-    			        position={{lat: row.geometry.coordinates[1], lng: row.geometry.coordinates[0]}}
-    			        key={row.properties.name}
-    			        onClick={this.toggleInfoWindow.bind(this, row.properties.name)}
-    			      >
-
-    			      </Marker>
-
-    			    ))}
+            {this.markers(mountains)}
 
 	            {
 	              showInfoWindow &&

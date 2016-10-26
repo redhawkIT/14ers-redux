@@ -10,29 +10,23 @@ export default class Card extends Component {
     }
     let showInfoWindow = true
     this.props.updateSelection(properties.name, position, showInfoWindow)
-
   }
 
   hideInfoWindow() {
-    let key = null
-    let position = null
-    let showInfoWindow = false
-    this.props.updateSelection(key, position, showInfoWindow)
+    this.props.updateSelection(null, null, false)
   }
 
   render() {
-    let photo = "/photos/" + this.props.data.photo
-    let properties = this.props.data.properties
-    let coordinates = this.props.data.geometry.coordinates
+    const {photo, properties, geometry} = this.props.data
 
     return (
       <div
         className="card-container"
-        onMouseEnter={this.showInfoWindow.bind(this, properties, coordinates)}
+        onMouseEnter={this.showInfoWindow.bind(this, properties, geometry.coordinates)}
         onMouseLeave={this.hideInfoWindow.bind(this)}>
         <div className="card">
           <div className="photo-container">
-            <img src={photo} alt={properties.name} className="photo" />
+            <img src={"/photos/" + photo} alt={properties.name} className="photo" />
           </div>
           <div className="details-container">
             <div className="name">{ properties.name }</div>
